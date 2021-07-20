@@ -1,5 +1,5 @@
 export type City = {
-    id: string;
+    id: number;
     name: string;
     country: string;
 };

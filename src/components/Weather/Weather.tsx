@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsGear } from 'react-icons/bs';
 import { TYPES } from '../../inversify/inversifyTypes';
 import { useInject } from '../../services/hooks';
+import { geoFindMe } from '../../services/utils';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
 import './Flipper.scss';
 import { Settings } from './Settings';
@@ -13,6 +14,11 @@ export interface WeatherProps {}
 export const Weather = (props: WeatherProps) => {
     const store = useInject<WeatherStore>(TYPES.WeatherStore);
     const [flipper, setFlip] = useState(false);
+    useEffect(() => {
+        if (!store.getCachedCities()) {
+            geoFindMe();
+        }
+    }, []);
 
     return (
         <div>
@@ -21,7 +27,7 @@ export const Weather = (props: WeatherProps) => {
                 <div className="flipper">
                     <div className="front">
                         {store.getCachedCities()?.map((c) => (
-                            <WeatherCard city={c} />
+                            <WeatherCard key={c.id} city={c} />
                         ))}
                     </div>
                     <div className="back">

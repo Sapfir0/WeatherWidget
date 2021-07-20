@@ -7,13 +7,21 @@ import { IApiInteractionService } from '../../typings/apiTypes';
 export class OpenWeatherMapInteractionService {
     constructor(@inject(TYPES.ApiInteractionService) protected _apiService: IApiInteractionService) {}
 
-    public request = async (city: string) => {
+    public getCurrentWeatherByCity = async (city: string) => {
         const response = await this._apiService.get(`weather`, {
-            params: {
-                q: city,
-                appid: API_KEY,
-                units: 'metric',
-            },
+            q: city,
+            appid: API_KEY,
+            units: 'metric',
+        });
+        return response;
+    };
+
+    public getCurrentWeatherByPosition = async (lat: number, lon: number) => {
+        const response = await this._apiService.get(`weather`, {
+            lat: lat,
+            lon: lon,
+            appid: API_KEY,
+            units: 'metric',
         });
         return response;
     };

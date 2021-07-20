@@ -1,3 +1,4 @@
+import { isRight } from 'fp-ts/lib/Either';
 import { inject, injectable } from 'inversify';
 import { makeObservable, observable } from 'mobx';
 import { TYPES } from '../../inversify/inversifyTypes';
@@ -16,8 +17,9 @@ export class WeatherCardStore {
     }
 
     public getWeather = async (city: string) => {
-        const response = await this.api.request(city);
-        console.log(response);
-        this.weatherData = response;
+        const response = await this.api.getCurrentWeatherByCity(city);
+        if (isRight(response)) {
+            this.weatherData = response.right;
+        }
     };
 }
