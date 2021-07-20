@@ -1,0 +1,39 @@
+
+.card {
+    width: 230px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.temperature {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.card__header {
+    display: flex;
+    margin-top: 10px;
+}
+
+.card__temp-line {
+    display: flex;
+    align-items: center;
+}
+
+.humidity, .visibility {
+    margin-top: 10px;
+}
+.pressure {
+    
+}
+
+.card__pressure-wind {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.settings {
+
+}
