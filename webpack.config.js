@@ -93,6 +93,7 @@ module.exports = (env) => {
         },
         plugins: [
             new CleanWebpackPlugin(),
+            new MiniCssExtractPlugin(),
             new webpack.DefinePlugin(envKeys),
             new HtmlWebpackPlugin({ template: './public/index.html', filename: 'index.html', inject: 'body' }),
         ],
