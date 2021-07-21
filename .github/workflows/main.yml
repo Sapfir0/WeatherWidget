@@ -2,7 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
   pull_request:
     branches: [ master ]
 
@@ -22,3 +22,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm i
       - run: npm run build 
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: build
