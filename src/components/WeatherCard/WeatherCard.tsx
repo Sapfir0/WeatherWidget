@@ -25,9 +25,7 @@ export const WeatherCard = observer((props: WeatherCardProps) => {
     return (
         <div className="card">
             <div className="card__header">
-                <h2>
-                    {props.city.name}, {props.city.country}
-                </h2>
+                {props.city.name}, {props.city.country}
             </div>
             {store.weatherData && (
                 <>
@@ -41,7 +39,10 @@ export const WeatherCard = observer((props: WeatherCardProps) => {
                     <div className="card__pressure-wind">
                         <div className="wind">
                             <FaLocationArrow
-                                style={{ transform: `rotate(calc(${standardDegree} - ${weatherData.wind.deg}deg))` }}
+                                style={{
+                                    transform: `rotate(calc(${standardDegree} - ${weatherData.wind.deg}deg))`,
+                                    marginRight: '5px',
+                                }}
                             />
                             {weatherData.wind.speed}m/s {degToCompass(weatherData.wind.deg)}
                         </div>

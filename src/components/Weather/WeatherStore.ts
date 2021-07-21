@@ -1,16 +1,17 @@
 import { isRight } from 'fp-ts/lib/Either';
 import { inject, injectable } from 'inversify';
-import { action, computed, makeObservable, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { TYPES } from '../../inversify/inversifyTypes';
 import { OpenWeatherMapInteractionService } from '../../services/apiServices/OpenWeatherMapInteractionService';
 import { LocalStorage } from '../../services/LocalStorage';
-import { getCoords } from '../../services/utils';
+import { getCoords, reorder } from '../../services/utils';
 import { City } from '../../typings/OWM';
 
 @injectable()
 export class WeatherStore {
     public initialCity: City | null = null;
     private localStorageField = 'cities';
+    public cities: City[] | undefined = [];
 
     constructor(
         @inject(TYPES.OpenWeatherMapInteractionService) private api: OpenWeatherMapInteractionService,
@@ -19,8 +20,9 @@ export class WeatherStore {
         makeObservable(this, {
             initialCity: observable,
             init: action,
-            cities: computed,
+            cities: observable,
         });
+        this.cities = this.ls.get(this.localStorageField);
     }
 
     public init = async () => {
@@ -34,19 +36,21 @@ export class WeatherStore {
         }
     };
 
-    public get cities(): City[] | undefined {
-        return this.ls.get(this.localStorageField);
-    }
-
     public pushNewCity = (city: City) => {
-        const existingCities = this.ls.get<City[]>(this.localStorageField) ?? [];
-        existingCities?.push(city);
+        this.cities?.push(city);
+        this.ls.set(this.localStorageField, this.cities);
+    };
+
+    public reorder = (startIndex: number, endIndex: number) => {
+        const existingCities = reorder(this.cities!, startIndex, endIndex);
         this.ls.set(this.localStorageField, existingCities);
+        this.cities = existingCities;
     };
 
     public removeCity = (city: City) => {
-        const existingCities = this.ls.get<City[]>(this.localStorageField);
-        return existingCities?.filter((c) => c.id !== city.id);
+        const existingCities = this.cities?.filter((c) => c.id !== city.id);
+        this.ls.set(this.localStorageField, existingCities);
+        this.cities = existingCities!;
     };
 
     public getWeatherByPosition = async (latlon: { latitude: number; longitude: number }) => {

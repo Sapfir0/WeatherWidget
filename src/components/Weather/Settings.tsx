@@ -20,6 +20,7 @@ export const Settings = observer(() => {
             <form onSubmit={() => store.pushNewCity(newCity!)}>
                 <Autocomplete
                     id="cities"
+                    className="city-input"
                     options={data as City[]}
                     getOptionLabel={(option) => option.name}
                     filterOptions={createFilterOptions({ limit: 30 })}
@@ -30,7 +31,7 @@ export const Settings = observer(() => {
                         <TextField {...params} label="Type here your city" variant="outlined" />
                     )}
                 />
-                <input type="submit" />
+                <input type="submit" value={'Send'} />
             </form>
         </>
     );

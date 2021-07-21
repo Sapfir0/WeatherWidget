@@ -11,7 +11,8 @@
 }
 
 .card__header {
-    // display: flex;
+    font-weight: 300;
+    font-size: x-large;
 }
 
 .card__temp-line {
@@ -22,8 +23,9 @@
 .humidity, .visibility {
     margin-top: 10px;
 }
-.pressure {
-    
+
+.city-input {
+    margin-top: 20px;
 }
 
 .card__pressure-wind {
@@ -33,7 +35,16 @@
 }
 
 .gear {
+    margin-bottom: 10px;
+}
+
+.right-icon {
     display: flex; 
     justify-content: flex-end;
-    margin-bottom: 10px;
+}
+
+.trash-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -13,8 +13,6 @@ export class FlipStore {
     }
 
     public toogle = () => {
-        console.log(this.isFlipped);
-
         this.isFlipped = !this.isFlipped;
     };
 }
