@@ -30,12 +30,12 @@ module.exports = (env) => {
         : {};
     const devtool = isProduction ? false : 'eval-cheap-module-source-map'; // false или строка по шаблону
     console.log(envKeys);
-
+    const serviceName = '/WeatherWidget/';
     return {
         entry: './src/index.tsx',
         output: {
-            path: path.resolve(__dirname, 'dist'),
-            publicPath: '/', // этот путь будет добавляться в пути до каждого бандла внутри html и других бандлов
+            path: path.resolve(__dirname, 'build'),
+            publicPath: isProduction ? serviceName : '/', // этот путь будет добавляться в пути до каждого бандла внутри html и других бандлов
             filename: 'js/[name].[fullhash].bundle.js',
             chunkFilename: 'js/[name].[fullhash].bundle.js',
         },
@@ -93,6 +93,9 @@ module.exports = (env) => {
         },
         plugins: [
             new CleanWebpackPlugin(),
+            new webpack.ProvidePlugin({
+                process: 'process/browser',
+              }),
             new MiniCssExtractPlugin(),
             new webpack.DefinePlugin(envKeys),
             new HtmlWebpackPlugin({ template: './public/index.html', filename: 'index.html', inject: 'body' }),
