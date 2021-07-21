@@ -2,6 +2,7 @@ import { IconButton } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import React, { useEffect } from 'react';
 import { BsGear } from 'react-icons/bs';
+import { GrClose } from 'react-icons/gr';
 import { TYPES } from '../../inversify/inversifyTypes';
 import { useInject } from '../../services/hooks';
 import { WeatherCard } from '../WeatherCard/WeatherCard';
@@ -24,9 +25,7 @@ export const Weather = observer((props: WeatherProps) => {
         <div className="card">
             <div className={`flip-container ${flipStore.isFlipped ? 'active' : ''}`}>
                 <div className="right-icon gear">
-                    <IconButton onClick={flipStore.toogle}>
-                        <BsGear className="settings" />
-                    </IconButton>
+                    <IconButton onClick={flipStore.toogle}>{flipStore.isFlipped ? <GrClose /> : <BsGear />}</IconButton>
                 </div>
                 <div className="flipper">
                     <div className="front">

@@ -2,6 +2,7 @@ import { IconButton } from '@material-ui/core';
 import { observer } from 'mobx-react';
 import React, { Component, CSSProperties } from 'react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
+import { BiGridSmall } from 'react-icons/bi';
 import { BsTrash } from 'react-icons/bs';
 import container from '../../inversify/inversifyContainer';
 import { TYPES } from '../../inversify/inversifyTypes';
@@ -12,7 +13,8 @@ import { WeatherStore } from './WeatherStore';
 const getItemStyle = (isDragging: boolean, draggableStyle: any): CSSProperties => ({
     margin: `0 0 5px 0`,
     paddingLeft: '10px',
-    background: isDragging ? 'grey' : 'darkgrey',
+    background: isDragging ? 'darkgrey' : 'white',
+    borderRadius: '5px',
     ...draggableStyle,
 });
 
@@ -69,6 +71,7 @@ export const SortableCitiesList = observer(
                                                 style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
                                             >
                                                 <div className="trash-button">
+                                                    <BiGridSmall />
                                                     {item.name}
                                                     <IconButton onClick={() => this.removeCity(item)}>
                                                         <BsTrash />

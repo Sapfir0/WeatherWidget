@@ -31,7 +31,7 @@ export const Settings = observer(() => {
                         <TextField {...params} label="Type here your city" variant="outlined" />
                     )}
                 />
-                <input type="submit" value={'Send'} />
+                <input className="send-button" type="submit" value={'Send'} />
             </form>
         </>
     );
