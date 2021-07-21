@@ -22,10 +22,12 @@ module.exports = (env) => {
     const finalPath = fs.existsSync(envPath) ? envPath : basePath;
     const fileEnv = dotenv.config({ path: finalPath }).parsed;
 
-    const envKeys = Object.keys(fileEnv).reduce((prev, next) => {
-        prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
-        return prev;
-    }, {});
+    const envKeys = fileEnv
+        ? Object.keys(fileEnv).reduce((prev, next) => {
+              prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
+              return prev;
+          }, {})
+        : {};
     const devtool = isProduction ? false : 'eval-cheap-module-source-map'; // false или строка по шаблону
     console.log(envKeys);
 

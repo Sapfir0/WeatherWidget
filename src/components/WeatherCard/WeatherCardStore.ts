@@ -1,6 +1,6 @@
 import { isRight } from 'fp-ts/lib/Either';
 import { inject, injectable } from 'inversify';
-import { makeObservable, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { TYPES } from '../../inversify/inversifyTypes';
 import { OpenWeatherMapInteractionService } from '../../services/apiServices/OpenWeatherMapInteractionService';
 
@@ -13,6 +13,7 @@ export class WeatherCardStore {
         this.api = api;
         makeObservable(this, {
             weatherData: observable,
+            getWeather: action,
         });
     }
 

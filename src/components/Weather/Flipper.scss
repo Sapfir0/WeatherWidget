@@ -1,5 +1,5 @@
 .flip-container {
-
+    width: 230px;
 
     perspective: 1000;
     }
@@ -9,7 +9,7 @@
     }
      
     .flip-container, .front, .back {
-    width: 320px;
+    width: 230px;
     height: 480px;
     }
     .flipper {

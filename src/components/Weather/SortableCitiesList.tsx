@@ -5,7 +5,6 @@ import { BsTrash } from 'react-icons/bs';
 import { reorder } from '../../services/utils';
 import { City } from '../../typings/OWM';
 
-
 const getItemStyle = (isDragging: boolean, draggableStyle: any): CSSProperties => ({
     margin: `0 0 5px 0`,
     paddingLeft: '4px',
@@ -14,7 +13,7 @@ const getItemStyle = (isDragging: boolean, draggableStyle: any): CSSProperties =
 });
 
 export interface SortableCitiesListProps {
-    items: City[];
+    items?: City[];
 }
 
 export interface SortableCitiesListState {
@@ -25,11 +24,9 @@ export class SortableCitiesList extends Component<SortableCitiesListProps, Sorta
     constructor(props: SortableCitiesListProps) {
         super(props);
         this.state = {
-            items: props.items,
+            items: props.items ?? [],
         };
     }
-
-
 
     onDragEnd = (result: DropResult) => {
         // dropped outside the list

@@ -1,5 +1,6 @@
 import { Container } from 'inversify';
 import 'reflect-metadata';
+import { FlipStore } from '../components/Weather/FlipStore';
 import { WeatherStore } from '../components/Weather/WeatherStore';
 import { WeatherCardStore } from '../components/WeatherCard/WeatherCardStore';
 import ApiInteractionService from '../services/ApiInteractionService';
@@ -20,5 +21,6 @@ container
 
 container.bind<WeatherStore>(TYPES.WeatherStore).to(WeatherStore).inSingletonScope();
 container.bind<WeatherCardStore>(TYPES.WeatherCardStore).to(WeatherCardStore);
+container.bind<FlipStore>(TYPES.FlipStore).to(FlipStore);
 
 export default container;

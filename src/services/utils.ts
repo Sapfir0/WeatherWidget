@@ -4,20 +4,16 @@ export const degToCompass = (num: number) => {
     return arr[val % 16];
 };
 
-export const geoFindMe = () => {
-    let coordinates = { latitude: 0, longitude: 0 };
-    function success(position: any) {
-        console.log(position);
-        const { latitude, longitude } = position.coords;
-        coordinates = { latitude, longitude };
-    }
+export const getCoords = async () => {
+    const pos: any = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
 
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success);
-    }
-    return;
+    return {
+        longitude: pos.coords.longitude,
+        latitude: pos.coords.latitude,
+    };
 };
-
 
 export const reorder = (list: any[], startIndex: number, endIndex: number) => {
     const result = Array.from(list);

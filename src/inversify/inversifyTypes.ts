@@ -5,4 +5,5 @@ export const TYPES = {
     OpenWeatherMapInteractionService: Symbol.for('OpenWeatherMapInteractionService'),
     WeatherCardStore: Symbol.for('WeatherCardStore'),
     WeatherStore: Symbol.for('WeatherStore'),
+    FlipStore: Symbol.for('FlipStore')
 };
