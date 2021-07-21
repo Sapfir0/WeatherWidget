@@ -3,12 +3,12 @@ import { bimap, Either } from 'fp-ts/Either';
 import { inject, injectable } from 'inversify';
 import * as qs from 'querystring';
 import { IApiInteractionService } from 'typings/apiTypes';
-import { TYPES } from '../inversify/inversifyTypes';
 import { API_URL } from '../config/serverRouteConstants';
+import { TYPES } from '../inversify/inversifyTypes';
 import { RequestSettings } from '../typings/common';
 import BaseApiInteractionService from './BaseApiInteractionService';
-import { BaseInteractionError } from './Errors/BaseInteractionError';
-import { NetworkError } from './Errors/NetworkError';
+import { BaseInteractionError } from './errors/BaseInteractionError';
+import { NetworkError } from './errors/NetworkError';
 
 @injectable()
 class ApiInteractionService implements IApiInteractionService {

@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { Either, left, right } from 'fp-ts/Either';
 import { injectable } from 'inversify';
-import { NetworkError } from './Errors/NetworkError';
+import { NetworkError } from './errors/NetworkError';
 
 @injectable()
 class BaseApiInteractionService {

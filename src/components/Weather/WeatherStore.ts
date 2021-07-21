@@ -29,8 +29,8 @@ export class WeatherStore {
         this.ls.set(this.localStorageField, existingCities);
     };
 
-    public removeCity = (city: string) => {
+    public removeCity = (city: City) => {
         const existingCities = this.ls.get<City[]>(this.localStorageField);
-        return existingCities?.filter((c) => c.id !== city);
+        return existingCities?.filter((c) => c.id !== city.id);
     };
 }
