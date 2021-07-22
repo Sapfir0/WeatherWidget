@@ -22,11 +22,11 @@ export class WeatherStore {
             init: action,
             cities: observable,
         });
-        this.cities = this.ls.get(this.localStorageField);
+        this.cities = this.ls.get(this.localStorageField) ?? [];
     }
 
     public init = async () => {
-        if (!this.cities) {
+        if (!this.ls.get(this.localStorageField)) {
             const position = await getCoords();
             const weatherData = await this.getWeatherByPosition(position);
             const newCity: City = { name: weatherData.name, country: weatherData.sys.country, id: weatherData.sys.id };
@@ -38,6 +38,7 @@ export class WeatherStore {
 
     public pushNewCity = (city: City) => {
         this.cities?.push(city);
+        console.log(this.cities);
         this.ls.set(this.localStorageField, this.cities);
     };
 
